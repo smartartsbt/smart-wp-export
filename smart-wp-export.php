@@ -2,13 +2,13 @@
 /*
 * Plugin Name: Smart WP Export
 * Description: Export any WordPress database table with filtering and pagination.
-* Version: 1.0
+* Version: 1.0.0
 * Contributors: smartartsbt
 * Author: Szucs Janos
 * Author URI: http://smartart.hu
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
-* Text Domain: smartart-export
+* Text Domain: smart-wp-export
 * Domain Path: /languages
 * Tags: export, database, shortcode, custom, backup, csv
 * Requires at least: 5.0
@@ -47,7 +47,7 @@ add_action('wp_enqueue_scripts', function () {
 });
 
 function swe_load_textdomain() {
-    load_plugin_textdomain('smartart-export', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+    load_plugin_textdomain('smart-wp-export', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 }
 add_action('plugins_loaded', 'swe_load_textdomain');
 
@@ -56,8 +56,8 @@ add_action('plugins_loaded', 'swe_load_textdomain');
 // Admin menu setup
 add_action('admin_menu', function () {
     add_menu_page(
-        __('Smart WP Export', 'smartart-export'),
-        __('Database Export', 'smartart-export'),
+        __('Smart WP Export', 'smart-wp-export'),
+        __('Database Export', 'smart-wp-export'),
         'manage_options',
         'smart-wp-export',
         ['SWE_Core', 'render_admin_page'],

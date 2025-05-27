@@ -2,7 +2,7 @@
 // templates/admin-table.php
 if (!current_user_can('manage_options')) {
     status_header(403);
-    wp_die(__('Admin access required', 'smartart-export'));
+    wp_die(__('Admin access required', 'smart-wp-export'));
 }
 
 global $wpdb;
@@ -14,7 +14,7 @@ $raw_source = $_REQUEST['data_source'] ?? '';
 if (strpos($raw_source, 'table:') === 0) {
     $name = substr($raw_source, strlen('table:'));
 } else {
-    echo '<p>' . esc_html__('No table selected.', 'smartart-export') . '</p>';
+    echo '<p>' . esc_html__('No table selected.', 'smart-wp-export') . '</p>';
     return;
 }
 
@@ -34,7 +34,7 @@ $offset = ($current_page - 1) * $per_page;
 
 $columns = SWE_Core::get_table_columns($name);
 if (empty($columns)) {
-    echo '<p>' . esc_html__('Failed to load table columns.', 'smartart-export') . '</p>';
+    echo '<p>' . esc_html__('Failed to load table columns.', 'smart-wp-export') . '</p>';
     return;
 }
 
@@ -102,11 +102,11 @@ function render_pagination($current_page, $total_pages, $wpn, $raw_source, $per_
                     "end_date" => $_REQUEST['end_date'] ?? '',
                 ])) ?>'
                 hx-target="#swe-results"
-            >&laquo; <?= esc_html__('Previous', 'smartart-export') ?></button>
+            >&laquo; <?= esc_html__('Previous', 'smart-wp-export') ?></button>
         <?php endif; ?>
 
         <span class="paging-input">
-            <?= sprintf(esc_html__('Page %d of %d', 'smartart-export'), $current_page, $total_pages) ?>
+            <?= sprintf(esc_html__('Page %d of %d', 'smart-wp-export'), $current_page, $total_pages) ?>
         </span>
 
         <?php if ($current_page < $total_pages): ?>
@@ -121,7 +121,7 @@ function render_pagination($current_page, $total_pages, $wpn, $raw_source, $per_
                     "end_date" => $_REQUEST['end_date'] ?? '',
                 ])) ?>'
                 hx-target="#swe-results"
-            ><?= esc_html__('Next', 'smartart-export') ?> &raquo;</button>
+            ><?= esc_html__('Next', 'smart-wp-export') ?> &raquo;</button>
         <?php endif; ?>
     </div>
     <?php
@@ -131,11 +131,11 @@ function render_pagination($current_page, $total_pages, $wpn, $raw_source, $per_
 <!-- Top controls flex container -->
 <div class="tablenav_top">
     <button type="button" class="button button-primary" onclick="exportToCSV()">
-        <?= esc_html__('Export to CSV', 'smartart-export') ?>
+        <?= esc_html__('Export to CSV', 'smart-wp-export') ?>
     </button>
 
      <label for="per_page_select">
-        <?= esc_html__('Items per page:', 'smartart-export') ?>
+        <?= esc_html__('Items per page:', 'smart-wp-export') ?>
         <select id="per_page_select" name="per_page" onchange="this.form.requestSubmit()">
             <?php foreach ($allowed_per_pages as $pp): ?>
                 <option value="<?= esc_attr($pp) ?>" <?= selected($pp, $per_page, false) ?>><?= esc_html($pp) ?></option>
@@ -147,17 +147,17 @@ function render_pagination($current_page, $total_pages, $wpn, $raw_source, $per_
     <span style="margin-left: 10px; color: #666;">
         <?= $date_column
             ? sprintf(
-                esc_html__('(Filtering by "%s")', 'smartart-export'),
+                esc_html__('(Filtering by "%s")', 'smart-wp-export'),
                 esc_html($date_column)
             )
-            : esc_html__('(No matching date column found)', 'smartart-export')
+            : esc_html__('(No matching date column found)', 'smart-wp-export')
         ?>
     </span>
 <?php endif; ?>
 
 <?php if (!$date_column && ($start_date || $end_date)): ?>
     <div style="margin-top: 4px; font-size: 11px; color: #999;">
-        <?= esc_html__('Checked for date column in:', 'smartart-export') ?>
+        <?= esc_html__('Checked for date column in:', 'smart-wp-export') ?>
         <code><?= esc_html(implode(', ', $date_column_guesses)) ?></code>
     </div>
 <?php endif; ?>
@@ -204,7 +204,7 @@ function render_pagination($current_page, $total_pages, $wpn, $raw_source, $per_
             </tbody>
         </table>
     <?php else: ?>
-        <p><?= esc_html__('No data found in this table.', 'smartart-export') ?></p>
+        <p><?= esc_html__('No data found in this table.', 'smart-wp-export') ?></p>
     <?php endif; ?>
 </form>
 
@@ -215,7 +215,7 @@ function render_pagination($current_page, $total_pages, $wpn, $raw_source, $per_
 function exportToCSV() {
     var table = document.querySelector('input[name="data_source"]').value;
     if (!table) {
-        alert('<?= esc_js(__('Please select a table to export.', 'smartart-export')) ?>');
+        alert('<?= esc_js(__('Please select a table to export.', 'smart-wp-export')) ?>');
         return;
     }
 
@@ -241,6 +241,6 @@ function exportToCSV() {
         link.download = table + '.csv';
         link.click();
     })
-    .catch(error => console.error('<?= esc_js(__('Error exporting table:', 'smartart-export')) ?>', error));
+    .catch(error => console.error('<?= esc_js(__('Error exporting table:', 'smart-wp-export')) ?>', error));
 }
 </script>

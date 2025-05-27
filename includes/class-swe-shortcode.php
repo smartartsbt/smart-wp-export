@@ -36,8 +36,8 @@ class SWE_Shortcode_Manager {
     public static function register_admin_menu() {
         add_submenu_page(
             'smart-wp-export',
-            __( 'Shortcode Viewer Settings', 'smartart-export' ),
-            __( 'Shortcodes', 'smartart-export' ),
+            __( 'Shortcode Viewer Settings', 'smart-wp-export' ),
+            __( 'Shortcodes', 'smart-wp-export' ),
             'manage_options',
             'swe-shortcode-configs',
             [ self::class, 'render_admin_page' ]
@@ -197,7 +197,7 @@ public static function swe_get_columns_ajax_handler() {
 
     $columns = $wpdb->get_col("SHOW COLUMNS FROM `$source`");
     if (empty($columns)) {
-        echo '<p class="description">' . esc_html__('No columns found or invalid table.', 'smartart-export') . '</p>';
+        echo '<p class="description">' . esc_html__('No columns found or invalid table.', 'smart-wp-export') . '</p>';
         wp_die();
     }
 
@@ -251,7 +251,7 @@ public static function swe_get_columns_ajax_handler() {
 
         echo '<span style="align-self:center;">'
            . sprintf(
-                esc_html__( 'Page %1$d of %2$d', 'smartart-export' ),
+                esc_html__( 'Page %1$d of %2$d', 'smart-wp-export' ),
                 $current,
                 $total
             )
@@ -276,7 +276,7 @@ public static function swe_get_columns_ajax_handler() {
         $atts = shortcode_atts( [ 'id' => '' ], $atts, 'smart_export_viewer' );
         $id   = sanitize_key( $atts['id'] );
         if ( ! $id ) {
-            return '<p>' . esc_html__( 'Shortcode ID missing.', 'smartart-export' ) . '</p>';
+            return '<p>' . esc_html__( 'Shortcode ID missing.', 'smart-wp-export' ) . '</p>';
         }
 
         // properly parenthesized nested ternary:
@@ -308,12 +308,12 @@ public static function swe_get_columns_ajax_handler() {
             $wpdb->prepare( "SELECT * FROM $table WHERE shortcode_id = %s", $id )
         );
         if ( ! $row ) {
-            return '<p>' . esc_html__( 'Invalid shortcode ID.', 'smartart-export' ) . '</p>';
+            return '<p>' . esc_html__( 'Invalid shortcode ID.', 'smart-wp-export' ) . '</p>';
         }
 
         $columns = maybe_unserialize( $row->columns );
         if ( empty( $columns ) || ! is_array( $columns ) ) {
-            return '<p>' . esc_html__( 'No columns defined.', 'smartart-export' ) . '</p>';
+            return '<p>' . esc_html__( 'No columns defined.', 'smart-wp-export' ) . '</p>';
         }
 
         // fetch data + count total pages
@@ -354,7 +354,7 @@ public static function swe_get_columns_ajax_handler() {
                 // per-page selector
                 echo '<form method="get">';
                 echo '<input type="hidden" name="id" value="' . esc_attr( $id ) . '">';
-                echo '<label>' . esc_html__( 'Items per page:', 'smartart-export' );
+                echo '<label>' . esc_html__( 'Items per page:', 'smart-wp-export' );
                 echo '<select name="per_page" onchange="this.form.submit()">';
                 foreach ( $allowed_pp as $pp ) {
                     printf(
@@ -388,7 +388,7 @@ public static function swe_get_columns_ajax_handler() {
             }
         } else {
             echo '<tr><td colspan="' . count( $columns ) . '">'
-               . esc_html__( 'No items found.', 'smartart-export' )
+               . esc_html__( 'No items found.', 'smart-wp-export' )
                . '</td></tr>';
         }
 

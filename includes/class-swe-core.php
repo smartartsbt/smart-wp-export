@@ -42,7 +42,7 @@ class SWE_Core {
     $source = $_REQUEST['data_source'] ?? '';
 
     if (empty($source)) {
-        echo '<p>' . esc_html__('No data source selected.', 'smartart-export') . '</p>';
+        echo '<p>' . esc_html__('No data source selected.', 'smart-wp-export') . '</p>';
         exit;
     }
 
@@ -59,7 +59,7 @@ class SWE_Core {
     } elseif ($type === 'table') {
         include SWE_PATH . 'templates/admin-table.php';
     } else {
-        echo '<p>' . esc_html__('Invalid source type.', 'smartart-export') . '</p>';
+        echo '<p>' . esc_html__('Invalid source type.', 'smart-wp-export') . '</p>';
     }
 
     exit;

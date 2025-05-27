@@ -2,7 +2,7 @@
 // templates/admin-post-type.php
 if (!current_user_can('manage_options')) {
     status_header(403);
-    wp_die(__('Admin access required', 'smartart-export'));
+    wp_die(__('Admin access required', 'smart-wp-export'));
 }
 
 global $wpdb;
@@ -12,7 +12,7 @@ $raw_source = $_REQUEST['data_source'] ?? '';
 if (strpos($raw_source, 'post_type:') === 0) {
     $name = substr($raw_source, strlen('post_type:'));
 } else {
-    echo '<p>' . esc_html__('No post type selected.', 'smartart-export') . '</p>';
+    echo '<p>' . esc_html__('No post type selected.', 'smart-wp-export') . '</p>';
     return;
 }
 
@@ -31,7 +31,7 @@ if (!in_array($per_page, $allowed_per_pages)) {
 // Fetch post type columns (assuming $wpdb->posts table)
 $columns = $wpdb->get_col("SHOW COLUMNS FROM {$wpdb->posts}");
 if (empty($columns)) {
-    echo '<p>' . esc_html__('Failed to load post columns.', 'smartart-export') . '</p>';
+    echo '<p>' . esc_html__('Failed to load post columns.', 'smart-wp-export') . '</p>';
     return;
 }
 
@@ -64,12 +64,12 @@ try {
     $query = new WP_Query($args);
 } catch (Throwable $e) {
     error_log($e->getMessage());
-    echo '<p>' . esc_html__('Error fetching posts. Please check your query.', 'smartart-export') . '</p>';
+    echo '<p>' . esc_html__('Error fetching posts. Please check your query.', 'smart-wp-export') . '</p>';
     return;
 }
 
 if (!$query->have_posts()) {
-    echo '<p>' . esc_html__('No posts found for this post type.', 'smartart-export') . '</p>';
+    echo '<p>' . esc_html__('No posts found for this post type.', 'smart-wp-export') . '</p>';
     return;
 }
 
@@ -90,11 +90,11 @@ function render_pagination($current_page, $total_pages, $wpn, $raw_source, $per_
                     "end_date" => $_REQUEST['end_date'] ?? '',
                 ])) ?>'
                 hx-target="#swe-results"
-            >&laquo; <?= esc_html__('Previous', 'smartart-export') ?></button>
+            >&laquo; <?= esc_html__('Previous', 'smart-wp-export') ?></button>
         <?php endif; ?>
 
         <span class="paging-input">
-            <?= sprintf(esc_html__('Page %d of %d', 'smartart-export'), $current_page, $total_pages) ?>
+            <?= sprintf(esc_html__('Page %d of %d', 'smart-wp-export'), $current_page, $total_pages) ?>
         </span>
 
         <?php if ($current_page < $total_pages): ?>
@@ -109,7 +109,7 @@ function render_pagination($current_page, $total_pages, $wpn, $raw_source, $per_
                     "end_date" => $_REQUEST['end_date'] ?? '',
                 ])) ?>'
                 hx-target="#swe-results"
-            ><?= esc_html__('Next', 'smartart-export') ?> &raquo;</button>
+            ><?= esc_html__('Next', 'smart-wp-export') ?> &raquo;</button>
         <?php endif; ?>
     </div>
     <?php
@@ -119,11 +119,11 @@ function render_pagination($current_page, $total_pages, $wpn, $raw_source, $per_
 <!-- Top controls flex container -->
 <div class="tablenav_top" >
     <button type="button" class="button button-primary" onclick="exportToCSV()">
-        <?= esc_html__('Export to CSV', 'smartart-export') ?>
+        <?= esc_html__('Export to CSV', 'smart-wp-export') ?>
     </button>
 
      <label for="per_page_select">
-        <?= esc_html__('Items per page:', 'smartart-export') ?>
+        <?= esc_html__('Items per page:', 'smart-wp-export') ?>
         <select id="per_page_select" name="per_page" onchange="this.form.requestSubmit()">
             <?php foreach ($allowed_per_pages as $pp): ?>
                 <option value="<?= esc_attr($pp) ?>" <?= selected($pp, $per_page, false) ?>><?= esc_html($pp) ?></option>
@@ -137,7 +137,7 @@ function render_pagination($current_page, $total_pages, $wpn, $raw_source, $per_
 
        <?php if ($start_date || $end_date): ?>
         <span style="margin-left: 10px; color: #666;">
-            <?= esc_html__('(Filtering by post date)', 'smartart-export') ?>
+            <?= esc_html__('(Filtering by post date)', 'smart-wp-export') ?>
         </span>
     <?php endif; ?>
     
@@ -189,7 +189,7 @@ function render_pagination($current_page, $total_pages, $wpn, $raw_source, $per_
 function exportToCSV() {
     var table = document.querySelector('input[name="data_source"]').value;
     if (!table) {
-        alert('<?= esc_js(__('Please select a source to export.', 'smartart-export')) ?>');
+        alert('<?= esc_js(__('Please select a source to export.', 'smart-wp-export')) ?>');
         return;
     }
 
@@ -208,6 +208,6 @@ function exportToCSV() {
             l.download = table + '.csv';
             l.click();
         })
-        .catch(e => console.error('<?= esc_js(__('Error exporting:', 'smartart-export')) ?>', e));
+        .catch(e => console.error('<?= esc_js(__('Error exporting:', 'smart-wp-export')) ?>', e));
 }
 </script>

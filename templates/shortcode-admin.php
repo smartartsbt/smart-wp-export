@@ -1,7 +1,7 @@
 <?php
 // templates/shortcode-admin.php
 if (!current_user_can('manage_options')) {
-    wp_die(__('Access denied', 'smartart-export'));
+    wp_die(__('Access denied', 'smart-wp-export'));
 }
 
 
@@ -22,26 +22,26 @@ if (isset($_GET['edit_id'])) {
 
 ?>
 <div class="wrap">
-    <h1><?php esc_html_e('Shortcode Viewer Settings', 'smartart-export'); ?></h1>
+    <h1><?php esc_html_e('Shortcode Viewer Settings', 'smart-wp-export'); ?></h1>
     <?php if ($saved): ?>
-        <div id="message" class="updated notice is-dismissible"><p><?php esc_html_e('Configuration saved.', 'smartart-export'); ?></p></div>
+        <div id="message" class="updated notice is-dismissible"><p><?php esc_html_e('Configuration saved.', 'smart-wp-export'); ?></p></div>
     <?php endif; ?>
     
     <?php if ( isset( $_GET['deleted'] ) ): ?>
         <div id="message" class="updated notice is-dismissible">
-            <p><?php esc_html_e( 'Configuration deleted.', 'smartart-export' ); ?></p>
+            <p><?php esc_html_e( 'Configuration deleted.', 'smart-wp-export' ); ?></p>
         </div>
     <?php endif; ?>
 
-    <h2><?php esc_html_e('Existing Configurations', 'smartart-export'); ?></h2>
+    <h2><?php esc_html_e('Existing Configurations', 'smart-wp-export'); ?></h2>
     <table class="widefat fixed striped">
       <thead><tr>
-    <th><?php esc_html_e('Shortcode ID', 'smartart-export'); ?></th>
-    <th><?php esc_html_e('Title', 'smartart-export'); ?></th>
-    <th><?php esc_html_e('Type', 'smartart-export'); ?></th>
-    <th><?php esc_html_e('Source', 'smartart-export'); ?></th>
-    <th><?php esc_html_e('Columns', 'smartart-export'); ?></th>
-    <th><?php esc_html_e('Shortcode', 'smartart-export'); ?></th>
+    <th><?php esc_html_e('Shortcode ID', 'smart-wp-export'); ?></th>
+    <th><?php esc_html_e('Title', 'smart-wp-export'); ?></th>
+    <th><?php esc_html_e('Type', 'smart-wp-export'); ?></th>
+    <th><?php esc_html_e('Source', 'smart-wp-export'); ?></th>
+    <th><?php esc_html_e('Columns', 'smart-wp-export'); ?></th>
+    <th><?php esc_html_e('Shortcode', 'smart-wp-export'); ?></th>
 </tr></thead>
 <tbody>
 
@@ -64,12 +64,12 @@ if (isset($_GET['edit_id'])) {
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
-            <tr><td colspan="5"><?php esc_html_e('No configurations found.', 'smartart-export'); ?></td></tr>
+            <tr><td colspan="5"><?php esc_html_e('No configurations found.', 'smart-wp-export'); ?></td></tr>
         <?php endif; ?>
         </tbody>
     </table>
 
-  <h2> <?php echo $edit_config ? esc_html__('Edit Configuration', 'smartart-export') : esc_html__('Add New Configuration', 'smartart-export'); ?></h2>
+  <h2> <?php echo $edit_config ? esc_html__('Edit Configuration', 'smart-wp-export') : esc_html__('Add New Configuration', 'smart-wp-export'); ?></h2>
     <form id="my-form" method="post">
         <?php if ($edit_config): ?>
             <input type="hidden" name="edit_id" value="<?php echo intval($edit_config->id); ?>">
@@ -78,14 +78,14 @@ if (isset($_GET['edit_id'])) {
         <?php wp_nonce_field('swe_shortcode_save'); ?>
         <table class="form-table">
             <tr>
-                <th><label for="shortcode_id"><?php esc_html_e('Shortcode ID', 'smartart-export'); ?></label></th>
+                <th><label for="shortcode_id"><?php esc_html_e('Shortcode ID', 'smart-wp-export'); ?></label></th>
                 <td><input name="shortcode_id" type="text" id="shortcode_id" value="<?php echo esc_attr($edit_config->shortcode_id ?? ''); ?>" class="regular-text" required />
-                <p class="description"><?php esc_html_e('Unique ID, used in [smart_export_viewer id="..."]', 'smartart-export'); ?></p></td>
+                <p class="description"><?php esc_html_e('Unique ID, used in [smart_export_viewer id="..."]', 'smart-wp-export'); ?></p></td>
             </tr>
             <tr>
-                <th><label for="title"><?php esc_html_e('Title', 'smartart-export'); ?></label></th>
+                <th><label for="title"><?php esc_html_e('Title', 'smart-wp-export'); ?></label></th>
                 <td><input name="title" type="text" id="title" value="<?php echo esc_attr($edit_config->title ?? ''); ?>" class="regular-text" />
-                <p class="description"><?php esc_html_e('Optional title above the table', 'smartart-export'); ?></p></td>
+                <p class="description"><?php esc_html_e('Optional title above the table', 'smart-wp-export'); ?></p></td>
             </tr>
            <tr>
   <th><label for="type">Data Type</label></th>
@@ -129,12 +129,12 @@ if (isset($_GET['edit_id'])) {
   </td>
 </tr>
 <tr>
-    <th><label for="columns"><?php esc_html_e('Columns', 'smartart-export'); ?></label></th>
+    <th><label for="columns"><?php esc_html_e('Columns', 'smart-wp-export'); ?></label></th>
       <td>
 <textarea name="columns" id="columns" cols="10" rows="3" class="large-text"><?php
     echo esc_textarea(isset($edit_config->columns) ? implode(', ', maybe_unserialize($edit_config->columns)) : '');
 ?></textarea>
-                <p class="description"><?php esc_html_e('Comma-separated list of column names to display', 'smartart-export'); ?></p>
+                <p class="description"><?php esc_html_e('Comma-separated list of column names to display', 'smart-wp-export'); ?></p>
             
 
   </td>
@@ -142,7 +142,7 @@ if (isset($_GET['edit_id'])) {
         </table>
         <p class="submit">
             <button type="submit" name="swe_shortcode_submit" class="button button-primary">
-    <?php echo $edit_config ? esc_html__('Update Configuration', 'smartart-export') : esc_html__('Save Configuration', 'smartart-export'); ?>
+    <?php echo $edit_config ? esc_html__('Update Configuration', 'smart-wp-export') : esc_html__('Save Configuration', 'smart-wp-export'); ?>
 </button>
         </p>
     </form>

@@ -1,0 +1,4 @@
+.tablenav{display: flex; justify-content: center; gap: 1em; flex-wrap: wrap;}
+.tablenav_top{display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em; flex-wrap: wrap; gap: 1em;}
+.swe-pagination{display:flex;justify-content:end;gap:1em;}
+.paging-input{align-self: center; font-weight: 600;}

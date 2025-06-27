@@ -2,7 +2,7 @@
 /*
 * Plugin Name: Smart WP Export
 * Description: Export any WordPress database table with filtering and pagination.
-* Version: 1.0.0
+* Version: 1.0.1
 * Contributors: smartartsbt
 * Author: Szucs Janos
 * Author URI: http://smartart.hu
@@ -13,7 +13,7 @@
 * Tags: export, database, shortcode, custom, backup, csv
 * Requires at least: 5.0
 * Tested up to: 6.8
-* Stable tag: 1.0.0
+* Stable tag: 1.0.1
 */
 
 defined('ABSPATH') || exit;
